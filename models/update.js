@@ -5,7 +5,7 @@ var model = {};
 
 model.update_email = function (user_info, controller_cb) {
 	var find = {
-		_id : mongo.convert (user_info.user_id)
+		user_id : user_info.user_id
 	};
 	var set = {
 		email_id : user_info.email_id

@@ -8,22 +8,22 @@ controller.user_info_by_id = function (req, res, next) {
 	
 	model.user_info_by_id (user_id, function (err, result) {
 		if (err)
-			res.send (err);
+			return res.send (err);
 
 		log.info ('User info: ' + result);
-		res.send ('User Info: ' + JSON.stringify(result));
+		return res.send ('User Info: ' + JSON.stringify(result));
 	});
 };
 
 controller.user_info_by_email = function (req, res, next) {
     var email_id = req.params.email_id;
 
-    model.user_info_by_email (email_id, function (err, result) {
-	        if (err)
-	            res.send (err);
-	
-	        res.send ('User Info: ' + JSON.stringify(result));
-	    });
+	model.user_info_by_email (email_id, function (err, result) {
+		if (err)
+			return res.send (err);
+
+		return res.send ('User Info: ' + JSON.stringify(result));
+	});
 };
 
 module.exports = controller;

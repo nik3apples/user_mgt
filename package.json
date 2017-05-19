@@ -14,6 +14,9 @@
     "bunyan": "^1.8.10",
     "express": "^4.15.2",
     "git": "^0.1.5",
-    "mongodb": "node_modules/mongodb"
+    "ioredis": "^2.5.0",
+    "mongodb": "node_modules/mongodb",
+    "pbkdf2": "^3.0.12",
+    "randomstring": "^1.1.5"
   }
 }

@@ -30,6 +30,8 @@ mongodb.find_documents = function (_collection, param, data, callback) {
 mongodb.insert_document = function (_collection, data, callback) {
 	// Get the documents collection
 	var collection = mongo.collection (_collection);
+	collection.createIndex ({ user_id : 1 }, { unique : true });
+	//var collection = mongo.collection (_collection).createIndex({ "user_id": 1 }, { unique: true });
 
 	// Insert document
 	collection.insertOne(data, function(err, res) {

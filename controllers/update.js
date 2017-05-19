@@ -11,9 +11,9 @@ controller.update_email = function (req, res, next) {
 
 	model.update_email (user_info, function (err, result) {
 		if (err)
-			res.send (err);
+			return res.send (err);
 
-		res.send (result);
+		return res.send (result);
 	});
 };
 

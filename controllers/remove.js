@@ -7,9 +7,9 @@ controller.user_by_id = function (req, res, next) {
 	
 	model.user_by_id (user_id, function (err, result) {
 		if (err)
-			res.send (err);
+			return res.send (err);
 
-		res.send (result);
+		return res.send (result);
 	});
 };
 
