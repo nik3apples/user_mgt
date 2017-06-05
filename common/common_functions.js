@@ -1,10 +1,13 @@
 var pbkdf2       = require('pbkdf2');
 var randomstring = require("randomstring");
 var config       = require('../config');
+var $            = require('jquery-deferred');
 
 var cfunc = {};
 
-cfunc.encrypt_password = function (clear_text, callback) {
+cfunc.encrypt_password = function (clear_text) {
+	var d = $.Deferred ();
+
 	var option_set = {
 		salt : randomstring.generate({
 			length  : config.salt_length,
@@ -17,7 +20,7 @@ cfunc.encrypt_password = function (clear_text, callback) {
 
 	pbkdf2.pbkdf2(clear_text, option_set.salt, option_set.rounds, option_set.length, option_set.hash, function (err, encrypted_key) {
 		if (err)
-			return callback (err, null, null);
+			d.reject (err);
 
 		var data = {
 			password      : encrypted_key.toString('hex'),
@@ -29,8 +32,10 @@ cfunc.encrypt_password = function (clear_text, callback) {
 			hash_digest   : config.hash_digest
 		};
 
-		return callback (null, data);
+		d.resolve (data);
 	});
+
+	return d.promise ();
 };
 
 module.exports = cfunc;
